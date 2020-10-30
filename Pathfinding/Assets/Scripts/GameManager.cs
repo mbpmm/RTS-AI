@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
 
     public GameObject miner;
+    public GameObject explorer;
+    public Transform spawnPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +23,15 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     void Update()
     {
         goldText.text = "Gold: " + gold;
+
+        if (Input.GetKeyDown(KeyCode.E)) 
+        {
+            GameObject explorerGO = Instantiate(explorer, spawnPoint.position, Quaternion.identity);
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            GameObject minerGO = Instantiate(miner, spawnPoint.position, Quaternion.identity);
+        }
     }
 }
