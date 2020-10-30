@@ -11,6 +11,8 @@ public class Aldeano : MonoBehaviour
     public int index;
     public LayerMask groundMask;
 
+    public Animator anim;
+
     private void Start()
     {
         //PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
@@ -31,6 +33,8 @@ public class Aldeano : MonoBehaviour
             path = newPath;
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
+            anim.SetBool("Walk_Anim", true);
+            anim.SetBool("Idle", false);
         }
     }
 
@@ -45,12 +49,15 @@ public class Aldeano : MonoBehaviour
                 index++;
                 if (index>=path.Length)
                 {
+                    anim.SetBool("Walk_Anim", false);
+                    anim.SetBool("Idle", true);
                     yield break;
                 }
                 currentWaypoint = path[index];
             }
 
             transform.position = Vector3.MoveTowards(transform.position, currentWaypoint,speed*Time.deltaTime);
+            transform.LookAt(currentWaypoint);
             yield return null;
         }
     }
@@ -59,7 +66,7 @@ public class Aldeano : MonoBehaviour
     {
         RaycastHit hitPos;
 
-        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitPos, 100, groundMask);
+        Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitPos, 1000, groundMask);
 
         return hitPos.point;
     }

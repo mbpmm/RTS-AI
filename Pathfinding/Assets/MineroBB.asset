@@ -49,24 +49,24 @@ MonoBehaviour:
     id=\"2\" />\r\n          <ActionNode id=\"5\" />\r\n          <ConditionEvalNode
     id=\"6\" />\r\n        </nodes>\r\n      </_nodes>\r\n    </BehaviorTree>\r\n   
     <RepeatDecorator id=\"1\">\r\n      <_data>\r\n        <data breakpoint=\"0\"
-    selected=\"False\" position=\"232.492 172\" name=\"Repeat\" description=\"Repeats
+    selected=\"False\" position=\"265.492 439\" name=\"Repeat\" description=\"Repeats
     the execution of its child node\" cardinality=\"1\" hasParent=\"False\">\r\n         
     <BehaviorTree id=\"0\" />\r\n          <RepeatDecorator id=\"1\" />\r\n       
     </data>\r\n      </_data>\r\n    </RepeatDecorator>\r\n    <PrioritySelectorNode
     id=\"2\">\r\n      <_data>\r\n        <data breakpoint=\"0\" selected=\"False\"
-    position=\"188.492 322\" name=\"Priority Selector\" description=\"\" cardinality=\"1\"
+    position=\"221.492 589\" name=\"Priority Selector\" description=\"\" cardinality=\"1\"
     hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n          <PrioritySelectorNode
     id=\"2\" />\r\n          <RepeatDecorator id=\"1\" />\r\n        </data>\r\n     
     </_data>\r\n    </PrioritySelectorNode>\r\n    <ConditionEvalNode id=\"6\">\r\n     
-    <_data>\r\n        <data breakpoint=\"0\" selected=\"False\" position=\"1026.492
-    1416\" name=\"Basic/CheckMouseButton\" description=\"Eval\" cardinality=\"1\"
+    <_data>\r\n        <data breakpoint=\"0\" selected=\"False\" position=\"1059.492
+    1683\" name=\"Basic/CheckMouseButton\" description=\"Eval\" cardinality=\"1\"
     hasParent=\"True\">\r\n          <BehaviorTree id=\"0\" />\r\n          <ConditionEvalNode
     id=\"6\" />\r\n          <PrioritySelectorNode id=\"2\" />\r\n        </data>\r\n     
     </_data>\r\n    </ConditionEvalNode>\r\n    <ActionNode id=\"5\">\r\n      <_data>\r\n       
-    <data breakpoint=\"0\" selected=\"False\" position=\"196.492 614\" name=\"MyActions/FollowPath\"
+    <data breakpoint=\"0\" selected=\"True\" position=\"229.492 881\" name=\"MyActions/FollowPath\"
     description=\"Sigue el camino buscado \" cardinality=\"0\" hasParent=\"False\">\r\n         
     <BehaviorTree id=\"0\" />\r\n          <ActionNode id=\"5\" />\r\n        </data>\r\n     
     </_data>\r\n    </ActionNode>\r\n  </editorInfo>\r\n</BehaviorBricks>"
-  zoom: 0.8
+  zoom: 0.5
   subslist: []
   _guid: 9299bdf9279d5914c97104acbfe61154
