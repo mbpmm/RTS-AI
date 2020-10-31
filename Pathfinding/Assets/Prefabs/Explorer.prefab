@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2538511200401955493}
   - component: {fileID: -8851817313005532761}
+  - component: {fileID: 7992218628851079974}
+  - component: {fileID: 4154891738084116300}
   m_Layer: 0
   m_Name: Explorer
   m_TagString: Untagged
@@ -51,6 +53,39 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &7992218628851079974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691128572548285533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7cff45b36ce3742b5c889d2838f2bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fovAngle: 152.2
+  mineInSight: 0
+  lastPlayerPos: {x: 0, y: 0, z: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 1024
+  detectionCol: {fileID: 4154891738084116300}
+  radius: 26.73
+--- !u!135 &4154891738084116300
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4691128572548285533}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 26.57
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1420401914503406666
 PrefabInstance:
   m_ObjectHideFlags: 0

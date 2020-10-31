@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     public int gold;
     public Text goldText;
     public int minerCost;
+    public int explorerCost;
 
 
     public GameObject miner;
@@ -26,12 +27,28 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
 
         if (Input.GetKeyDown(KeyCode.E)) 
         {
-            GameObject explorerGO = Instantiate(explorer, spawnPoint.position, Quaternion.identity);
+            if (gold>=explorerCost)
+            {
+                gold -= explorerCost;
+                GameObject explorerGO = Instantiate(explorer, spawnPoint.position, Quaternion.identity);
+            }
+            else
+            {
+                Debug.Log("No hay oro suficiente");
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            GameObject minerGO = Instantiate(miner, spawnPoint.position, Quaternion.identity);
+            if (gold >= explorerCost)
+            {
+                gold -= explorerCost;
+                GameObject minerGO = Instantiate(miner, spawnPoint.position, Quaternion.identity);
+            }
+            else
+            {
+                Debug.Log("No hay oro suficiente");
+            }
         }
     }
 }

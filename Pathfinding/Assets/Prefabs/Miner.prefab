@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5988677888395085147}
   - component: {fileID: 5988677888395085146}
   - component: {fileID: 8116522505977299534}
+  - component: {fileID: 1432982283628830976}
   m_Layer: 0
   m_Name: Miner
   m_TagString: Untagged
@@ -181,8 +182,28 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 14.73
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1432982283628830976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5988677888395085148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7cff45b36ce3742b5c889d2838f2bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fovAngle: 134.63
+  mineInSight: 0
+  lastPlayerPos: {x: 0, y: 0, z: 0}
+  mask:
+    serializedVersion: 2
+    m_Bits: 1024
+  detectionCol: {fileID: 8116522505977299534}
+  radius: 16.7
 --- !u!1001 &8882057256361114044
 PrefabInstance:
   m_ObjectHideFlags: 0
