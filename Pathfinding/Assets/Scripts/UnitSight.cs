@@ -11,14 +11,16 @@ public class UnitSight : MonoBehaviour
 
     public SphereCollider detectionCol;
     public float radius;
+    public Explorador explorador;
     // Start is called before the first frame update
     void Awake()
     {
+        explorador = GetComponent<Explorador>();
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Mine")
+        if (other.gameObject.tag == "Flag")
         {
             mineInSight = false;
 
@@ -29,21 +31,23 @@ public class UnitSight : MonoBehaviour
             {
                 RaycastHit hit;
 
-                if (Physics.Raycast(transform.position, direction.normalized, out hit, detectionCol.radius, mask, QueryTriggerInteraction.Ignore))
+                if (Physics.Raycast(transform.position, direction.normalized, out hit, detectionCol.radius+1, mask))
                 {
-                    if (hit.transform.gameObject.tag == "Mine")
+                    if (hit.transform.gameObject.tag == "Flag" && explorador.currentState!=Explorador.ExploradorStates.Marking)
                     {
                         mineInSight = true;
+                        explorador.currentState = Explorador.ExploradorStates.Marking;
+                        explorador.spotPos = hit.transform.position;
+                        explorador.goToSpot = true;
                     }
                 }
             }
-
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Mine")
+        if (other.gameObject.tag == "Flag")
         {
             mineInSight = false;
         }
