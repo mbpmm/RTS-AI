@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5988677888395085147}
   - component: {fileID: 5988677888395085146}
   - component: {fileID: 8116522505977299534}
-  - component: {fileID: 1432982283628830976}
+  - component: {fileID: 8544715434268132586}
   m_Layer: 0
   m_Name: Miner
   m_TagString: Untagged
@@ -96,13 +96,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 920baeb9859a03c41a9f89014b1e8def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  maxX: 135
+  maxZ: 135
+  posY: 1.02
+  currentState: 0
+  timer: 0
   speed: 15
   index: 0
   groundMask:
     serializedVersion: 2
     m_Bits: 512
+  sight: {fileID: 8544715434268132586}
+  spotPos: {x: 0, y: 0, z: 0}
+  reachedPathEnd: 0
+  goToSpot: 0
   anim: {fileID: 8796037323146290216}
+  goldMined: 0
+  goldExtractionRate: 5
 --- !u!114 &5988677888395085146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,7 +120,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5988677888395085148}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 422fb6956201c7944ae2113a1a53b0b8, type: 3}
   m_Name: 
@@ -123,8 +133,9 @@ MonoBehaviour:
     intParams: 
     intParamsNames: []
     intParamsLostDefaultValue: 
-    boolParams: 
-    boolParamsNames: []
+    boolParams: 01
+    boolParamsNames:
+    - valueA
     boolParamsLostDefaultValue: 
     floatParams: []
     floatParamsNames: []
@@ -137,10 +148,8 @@ MonoBehaviour:
     colorParamsLostDefaultValue: 
     objectParams:
     - {fileID: 5988677888395085147}
-    - {fileID: 0}
     objectParamsNames:
-    - Aldeano
-    - shootPoint
+    - Miner
     objectParamsLostDefaultValue: 
     layerMaskParams: []
     layerMaskParamsNames: []
@@ -184,7 +193,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 14.73
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1432982283628830976
+--- !u!114 &8544715434268132586
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -193,17 +202,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 5988677888395085148}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de7cff45b36ce3742b5c889d2838f2bc, type: 3}
+  m_Script: {fileID: 11500000, guid: 80df7e2ec0b08ce4abaf7d9e0a2540e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fovAngle: 134.63
   mineInSight: 0
-  lastPlayerPos: {x: 0, y: 0, z: 0}
   mask:
     serializedVersion: 2
     m_Bits: 1024
   detectionCol: {fileID: 8116522505977299534}
   radius: 16.7
+  miner: {fileID: 5988677888395085147}
 --- !u!1001 &8882057256361114044
 PrefabInstance:
   m_ObjectHideFlags: 0

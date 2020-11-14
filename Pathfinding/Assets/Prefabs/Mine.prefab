@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 315729151386201}
   m_Layer: 10
   m_Name: Mine
-  m_TagString: Untagged
+  m_TagString: Mine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,7 +107,7 @@ PrefabInstance:
     - target: {fileID: 8148043428560057951, guid: 1f97905aa626c5341aba1d2d6ecbb370,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Mine
       objectReference: {fileID: 0}
     - target: {fileID: 8148043428560057951, guid: 1f97905aa626c5341aba1d2d6ecbb370,
         type: 3}
@@ -197,7 +197,7 @@ PrefabInstance:
     - target: {fileID: 8579211434831629519, guid: 941400b8c7ffc1948975783266b7511b,
         type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Mine
       objectReference: {fileID: 0}
     - target: {fileID: 8579211434831629519, guid: 941400b8c7ffc1948975783266b7511b,
         type: 3}

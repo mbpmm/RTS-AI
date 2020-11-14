@@ -59,6 +59,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explorador: {fileID: 0}
   goldMine: {fileID: 598707319981776818, guid: 3120e0ab5ccd7c94394a71ece3cecc6a, type: 3}
+  mineSpawner: {fileID: 0}
 --- !u!1 &4691128572548285533
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxX: 135
   maxZ: 135
-  posY: 2
+  posY: 1.5
   currentState: 0
   timer: 0
   speed: 15
@@ -134,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fovAngle: 152.2
-  mineInSight: 0
+  spotInSight: 0
   mask:
     serializedVersion: 2
     m_Bits: 2048

@@ -6,26 +6,25 @@ public class Spot : MonoBehaviour
 {
     public Explorador explorador;
     public GameObject goldMine;
+    public GameObject mineSpawner;
 
-    private void Awake()
+    private MineSpawner mS;
+
+    private void Start()
     {
         explorador = GetComponentInParent<Explorador>();
+        mineSpawner = GameObject.FindGameObjectWithTag("MineSpawner");
+        mS = mineSpawner.GetComponent<MineSpawner>();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Flag")
         {
-            explorador.sight.mineInSight = false;
+            explorador.sight.spotInSight = false;
             Destroy(other.gameObject);
+            mS.cantSpots--;
             GameObject goldMineGO = Instantiate(goldMine, other.transform.position, Quaternion.identity);
             explorador.currentState = Explorador.ExploradorStates.Patrol;
         }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        //if (collision.gameObject.tag == "Explorer")
-        //{
-        //    Destroy(this.gameObject);
-        //}
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class UnitSight : MonoBehaviour
+public class MinerSight : MonoBehaviour
 {
     public float fovAngle;
     public bool mineInSight;
@@ -11,16 +11,16 @@ public class UnitSight : MonoBehaviour
 
     public SphereCollider detectionCol;
     public float radius;
-    public Explorador explorador;
+    public Miner miner;
     // Start is called before the first frame update
     void Awake()
     {
-        explorador = GetComponent<Explorador>();
+        miner = GetComponent<Miner>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Flag")
+        if (other.gameObject.tag == "Mine")
         {
             mineInSight = false;
 
@@ -33,12 +33,12 @@ public class UnitSight : MonoBehaviour
 
                 if (Physics.Raycast(transform.position, direction.normalized, out hit, detectionCol.radius+1, mask))
                 {
-                    if (hit.transform.gameObject.tag == "Flag" && explorador.currentState!=Explorador.ExploradorStates.Marking)
+                    if (hit.transform.gameObject.tag == "Mine")
                     {
                         mineInSight = true;
-                        explorador.currentState = Explorador.ExploradorStates.Marking;
-                        explorador.spotPos = hit.transform.position;
-                        explorador.goToSpot = true;
+                        miner.currentState = Miner.MinerStates.Mining;
+                        miner.spotPos = hit.transform.position;
+                        miner.goToSpot = true;
                     }
                 }
             }
@@ -47,7 +47,7 @@ public class UnitSight : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Flag")
+        if (other.gameObject.tag == "Mine")
         {
             mineInSight = false;
         }

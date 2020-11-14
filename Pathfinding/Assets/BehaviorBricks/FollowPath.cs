@@ -6,23 +6,27 @@ using Pada1.BBCore.Framework; // BasePrimitiveAction
 using BBUnity.Actions;
 
 
-    [Action("MyActions/FollowPath")]
+[Action("MyActions/FollowPath")]
 [Help("Sigue el camino buscado ")]
 public class FollowPath : GOAction
 {
 
-    [InParam("aldeano")]
-    private Aldeano aldeano;
+    [InParam("Miner")]
+    private Miner miner;
 
     
     // Main class method, invoked by the execution engine.
     public override TaskStatus OnUpdate()
     {
-        aldeano = gameObject.GetComponent<Aldeano>();
+        miner = gameObject.GetComponent<Miner>();
         // Instantiate the bullet prefab.
-        aldeano.index = 0;
-
-        PathRequestManager.RequestPath(aldeano.gameObject.transform.position, aldeano.GetPos(), aldeano.OnPathFound);
+        if (miner.reachedPathEnd)
+        {
+            miner.index = 0;
+            miner.reachedPathEnd = false;
+            PathRequestManager.RequestPath(miner.gameObject.transform.position, miner.GetPos(), miner.OnPathFound);
+        }
+        
 
         return TaskStatus.COMPLETED;
 

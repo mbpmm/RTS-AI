@@ -20,9 +20,6 @@ public class PathFinder : MonoBehaviour
     }
     IEnumerator FindPath(Vector3 startPos, Vector3 targetPos)
     {
-        //Stopwatch sw = new Stopwatch();
-        //sw.Start();
-
         Vector3[] waypoints = new Vector3[0];
         bool pathSuccess = false;
 
@@ -42,8 +39,6 @@ public class PathFinder : MonoBehaviour
 
                 if (currentNode == targetNode)
                 {
-                    //sw.Stop();
-                    //print("Path found: " + sw.ElapsedMilliseconds);
                     pathSuccess = true;
                     break;
                 }

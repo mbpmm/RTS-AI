@@ -17,38 +17,38 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         goldText.text = "Gold: " + gold;
+    }
 
-        if (Input.GetKeyDown(KeyCode.E)) 
+    public void CreateExplorer()
+    {
+        if (gold >= explorerCost)
         {
-            if (gold>=explorerCost)
-            {
-                gold -= explorerCost;
-                GameObject explorerGO = Instantiate(explorer, spawnPoint.position, Quaternion.identity);
-            }
-            else
-            {
-                Debug.Log("No hay oro suficiente");
-            }
+            gold -= explorerCost;
+            GameObject explorerGO = Instantiate(explorer, spawnPoint.position, Quaternion.identity);
         }
-
-        if (Input.GetKeyDown(KeyCode.M))
+        else
         {
-            if (gold >= explorerCost)
-            {
-                gold -= explorerCost;
-                GameObject minerGO = Instantiate(miner, spawnPoint.position, Quaternion.identity);
-            }
-            else
-            {
-                Debug.Log("No hay oro suficiente");
-            }
+            Debug.Log("No hay oro suficiente");
+        }
+    }
+
+    public void CreateMiner()
+    {
+        if (gold >= explorerCost)
+        {
+            gold -= explorerCost;
+            GameObject minerGO = Instantiate(miner, spawnPoint.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.Log("No hay oro suficiente");
         }
     }
 }

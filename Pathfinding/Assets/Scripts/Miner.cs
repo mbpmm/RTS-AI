@@ -2,61 +2,65 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Explorador : MonoBehaviour
+public class Miner : MonoBehaviour
 {
-    public enum ExploradorStates
+    public enum MinerStates
     {
         Idle,
         Patrol,
-        Marking,
+        Mining,
+        Returning,
         AllStates
     }
 
     public int maxX;
     public int maxZ;
     public float posY;
-    public ExploradorStates currentState;
+    private bool goToHQ;
+    public MinerStates currentState;
     public float timer;
     public float speed;
     Vector3[] path;
     public int index;
     public LayerMask groundMask;
-    public ExplorerSight sight;
+    public MinerSight sight;
     public Vector3 spotPos;
 
     private float maxTimeIdle = 5f;
     public bool reachedPathEnd;
     public bool goToSpot;
 
-    // Start is called before the first frame update
-    void Start()
+    public Animator anim;
+
+    public float goldMined;
+    public float goldExtractionRate;
+    private float maxGoldCarried = 100.0f;
+    private void Start()
     {
         reachedPathEnd = true;
         goToSpot = true;
     }
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         switch (currentState)
         {
-            case ExploradorStates.Idle:
+            case MinerStates.Idle:
                 timer += Time.deltaTime;
-                if (timer>=maxTimeIdle)
+                if (timer >= maxTimeIdle)
                 {
-                    currentState = ExploradorStates.Patrol;
+                    currentState = MinerStates.Patrol;
                     timer = 0;
                 }
                 break;
-            case ExploradorStates.Patrol:
+            case MinerStates.Patrol:
                 if (reachedPathEnd)
                 {
                     index = 0;
                     reachedPathEnd = false;
-                    PathRequestManager.RequestPath(transform.position, GetRandomPos(), OnPathFound);
+                    PathRequestManager.RequestPath(transform.position, GetPos(), OnPathFound);
                 }
                 break;
-            case ExploradorStates.Marking:
+            case MinerStates.Mining:
                 if (goToSpot)
                 {
                     goToSpot = false;
@@ -66,29 +70,52 @@ public class Explorador : MonoBehaviour
                 }
                 if (reachedPathEnd)
                 {
-                    currentState = ExploradorStates.Patrol;
+                    if (goldMined<maxGoldCarried)
+                    {
+                        goldMined += Time.deltaTime * goldExtractionRate;
+                    }
+                    else
+                    {
+                        goToHQ = true;
+                        currentState = MinerStates.Returning;
+                    }
                 }
                 break;
-            case ExploradorStates.AllStates:
+            case MinerStates.Returning:
+                if (goToHQ)
+                {
+                    goToHQ = false;
+                    index = 0;
+                    reachedPathEnd = false;
+                    PathRequestManager.RequestPath(transform.position, GameManager.Get().spawnPoint.position, OnPathFound);
+                }
+                if (reachedPathEnd)
+                {
+                    GameManager.Get().gold += (int)goldMined;
+                    goldMined = 0;
+                    currentState = MinerStates.Patrol;
+                }
+                break;
+            case MinerStates.AllStates:
                 break;
             default:
                 break;
         }
-
-        
     }
 
-    public void OnPathFound(Vector3[] newPath, bool pathSuccess)
+    public void OnPathFound(Vector3[] newPath,bool pathSuccess)
     {
         if (pathSuccess)
         {
             path = newPath;
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
+            anim.SetBool("Walk_Anim", true);
+            anim.SetBool("Idle", false);
         }
         else
         {
-            reachedPathEnd = true;
+            reachedPathEnd = false;
         }
     }
 
@@ -101,30 +128,24 @@ public class Explorador : MonoBehaviour
             if (transform.position == currentWaypoint)
             {
                 index++;
-                if (index >= path.Length)
+                if (index>=path.Length)
                 {
                     reachedPathEnd = true;
+                    anim.SetBool("Walk_Anim", false);
+                    anim.SetBool("Idle", true);
                     yield break;
                 }
                 currentWaypoint = path[index];
             }
 
-            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint,speed*Time.deltaTime);
             transform.LookAt(currentWaypoint);
             yield return null;
         }
     }
 
-    public Vector3 GetRandomPos()
+    public Vector3 GetPos()
     {
-        // agarrar punto del mouse 
-        //RaycastHit hitPos;
-
-        //Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hitPos, 1000, groundMask);
-
-        //return hitPos.point;
-
-        //posicion random en una zona
         Vector3 pos = new Vector3(Random.Range(-maxX, maxX), posY, Random.Range(-maxZ, maxZ));
 
         return pos;
@@ -132,31 +153,22 @@ public class Explorador : MonoBehaviour
 
     public void OnDrawGizmos()
     {
-        if (path != null)
+        if (path!=null)
         {
             for (int i = index; i < path.Length; i++)
             {
-                Gizmos.color = Color.green;
+                Gizmos.color = Color.yellow;
                 Gizmos.DrawCube(path[i], Vector3.one);
 
-                if (i == index)
+                if (i==index)
                 {
                     Gizmos.DrawLine(transform.position, path[i]);
                 }
                 else
                 {
-                    Gizmos.DrawLine(path[i - 1], path[i]);
+                    Gizmos.DrawLine(path[i-1], path[i]);
                 }
             }
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag=="Flag")
-        {
-            //currentState = ExploradorStates.Patrol;
-            //Destroy(other.gameObject);
         }
     }
 }

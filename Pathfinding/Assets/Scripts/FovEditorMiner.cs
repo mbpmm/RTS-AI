@@ -5,12 +5,12 @@ using UnityEditor;
 
 #if UNITY_EDITOR
 
-[CustomEditor(typeof(UnitSight))]
-public class FieldOfViewEditor : Editor
+[CustomEditor(typeof(MinerSight))]
+public class FieldOfViewEditor2 : Editor
 {
 	void OnSceneGUI()
 	{
-		UnitSight fow = (UnitSight)target;
+		MinerSight fow = (MinerSight)target;
 		Handles.color = Color.white;
 		Handles.DrawWireArc(fow.transform.position, Vector3.up, Vector3.forward, 360, fow.detectionCol.radius);
 		Vector3 viewAngleA = fow.DirFromAngle(-fow.fovAngle / 2, false);
