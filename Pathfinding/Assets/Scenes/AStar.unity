@@ -1332,7 +1332,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cb99bfb8a1c6fd469555a97964c00e7, type: 3}
   m_Name: 
@@ -1565,6 +1565,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1356560554}
   m_CullTransparentMesh: 0
+--- !u!114 &1559923735 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8544715434268132586, guid: cd5e5e5d7b7162a4baf7ddcbbabcc7ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 5988677887575350613}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80df7e2ec0b08ce4abaf7d9e0a2540e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1705800085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,11 +1991,21 @@ PrefabInstance:
       propertyPath: blackboard.boolParamsNames.Array.data[0]
       value: valueA
       objectReference: {fileID: 0}
+    - target: {fileID: 5988677888395085146, guid: cd5e5e5d7b7162a4baf7ddcbbabcc7ea,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5988677888395085147, guid: cd5e5e5d7b7162a4baf7ddcbbabcc7ea,
         type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5988677888395085147, guid: cd5e5e5d7b7162a4baf7ddcbbabcc7ea,
+        type: 3}
+      propertyPath: sight
+      value: 
+      objectReference: {fileID: 1559923735}
     - target: {fileID: 5988677888395085148, guid: cd5e5e5d7b7162a4baf7ddcbbabcc7ea,
         type: 3}
       propertyPath: m_Name

@@ -35,6 +35,8 @@ public class Miner : MonoBehaviour
     public float goldMined;
     public float goldExtractionRate;
     private float maxGoldCarried = 100.0f;
+
+    public MineGold mineGold;
     private void Start()
     {
         reachedPathEnd = true;
@@ -73,10 +75,12 @@ public class Miner : MonoBehaviour
                     if (goldMined<maxGoldCarried)
                     {
                         goldMined += Time.deltaTime * goldExtractionRate;
+                   
                     }
                     else
                     {
                         goToHQ = true;
+                        mineGold.currentMineGold -= maxGoldCarried;
                         currentState = MinerStates.Returning;
                     }
                 }
@@ -89,11 +93,22 @@ public class Miner : MonoBehaviour
                     reachedPathEnd = false;
                     PathRequestManager.RequestPath(transform.position, GameManager.Get().spawnPoint.position, OnPathFound);
                 }
+
                 if (reachedPathEnd)
                 {
                     GameManager.Get().gold += (int)goldMined;
                     goldMined = 0;
-                    currentState = MinerStates.Patrol;
+
+                    if (mineGold.currentMineGold >= 0 && mineGold)
+                    {
+                        goToSpot = true;
+                        currentState = MinerStates.Mining;
+                    }
+                    else
+                    {
+                        reachedPathEnd = true;
+                        currentState = MinerStates.Patrol;
+                    }
                 }
                 break;
             case MinerStates.AllStates:

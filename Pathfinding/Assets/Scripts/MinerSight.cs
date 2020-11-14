@@ -39,6 +39,7 @@ public class MinerSight : MonoBehaviour
                         miner.currentState = Miner.MinerStates.Mining;
                         miner.spotPos = hit.transform.position;
                         miner.goToSpot = true;
+                        miner.mineGold = other.GetComponentInParent<MineGold>();
                     }
                 }
             }
