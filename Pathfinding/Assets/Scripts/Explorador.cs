@@ -151,12 +151,4 @@ public class Explorador : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag=="Flag")
-        {
-            //currentState = ExploradorStates.Patrol;
-            //Destroy(other.gameObject);
-        }
-    }
 }
