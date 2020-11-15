@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     public GameObject miner;
     public GameObject explorer;
     public Transform spawnPoint;
+
+    public GameObject infoGold;
+
+    private float timer;
+    private float maxInfoGoldTime = 3.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +29,16 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
     void Update()
     {
         goldText.text = "Gold: " + gold;
+
+        if (infoGold)
+        {
+            timer += Time.deltaTime;
+            if (timer >= maxInfoGoldTime)
+            {
+                infoGold.SetActive(false);
+                timer = 0;
+            }
+        }
     }
 
     public void CreateExplorer()
@@ -35,20 +50,20 @@ public class GameManager : MonoBehaviourSingleton<GameManager>
         }
         else
         {
-            Debug.Log("No hay oro suficiente");
+            infoGold.SetActive(true);
         }
     }
 
     public void CreateMiner()
     {
-        if (gold >= explorerCost)
+        if (gold >= minerCost)
         {
-            gold -= explorerCost;
+            gold -= minerCost;
             GameObject minerGO = Instantiate(miner, spawnPoint.position, Quaternion.identity);
         }
         else
         {
-            Debug.Log("No hay oro suficiente");
+            infoGold.SetActive(true);
         }
     }
 }

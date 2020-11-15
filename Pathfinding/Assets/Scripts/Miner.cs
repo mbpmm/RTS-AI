@@ -70,6 +70,7 @@ public class Miner : MonoBehaviour
                     index = 0;
                     PathRequestManager.RequestPath(transform.position, spotPos, OnPathFound);
                 }
+
                 if (reachedPathEnd)
                 {
                     if (goldMined<maxGoldCarried)
@@ -79,9 +80,17 @@ public class Miner : MonoBehaviour
                     }
                     else
                     {
-                        goToHQ = true;
-                        mineGold.currentMineGold -= maxGoldCarried;
-                        currentState = MinerStates.Returning;
+                        if (mineGold)
+                        {
+                            goToHQ = true;
+                            mineGold.Mined();
+                            mineGold.currentMineGold -= maxGoldCarried;
+                            currentState = MinerStates.Returning;
+                        }
+                        else
+                        {
+                            currentState = MinerStates.Patrol;
+                        }
                     }
                 }
                 break;
@@ -130,7 +139,7 @@ public class Miner : MonoBehaviour
         }
         else
         {
-            reachedPathEnd = false;
+            reachedPathEnd = true;
         }
     }
 

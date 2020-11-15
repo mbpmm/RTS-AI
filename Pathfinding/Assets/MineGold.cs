@@ -13,4 +13,10 @@ public class MineGold : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void Mined()
+    {
+        Vector3 scaleChange = new Vector3(0.2f,0.2f,0.2f);
+        transform.localScale -= scaleChange;
+    }
 }
